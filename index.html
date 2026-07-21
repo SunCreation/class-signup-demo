@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>원데이 클래스 신청</title>
+  <meta name="description" content="봄날의 스케치북 원데이 클래스 신청">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <p class="eyebrow"><span>봄날의 스케치북 · 원데이 클래스</span></p>
+
+  <!-- 로딩 -->
+  <section class="view" id="view-loading">
+    <p class="loading">불러오는 중…</p>
+  </section>
+
+  <!-- 인증 (회원가입 / 로그인) -->
+  <section class="view" id="view-auth" hidden>
+    <div class="card">
+      <div class="spine">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="content">
+        <!-- 로그인 폼 -->
+        <div id="pane-login">
+          <span class="tag">STEP · 로그인</span>
+          <h1>로그인</h1>
+          <p class="subline">가입한 이메일로 다시 들어오세요</p>
+
+          <form id="form-login" novalidate>
+            <div class="field">
+              <label for="login-email">이메일</label>
+              <input id="login-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label for="login-pw">비밀번호</label>
+              <input id="login-pw" name="password" type="password" autocomplete="current-password" placeholder="비밀번호 입력" required>
+            </div>
+            <button class="cta" type="submit" id="btn-login">로그인</button>
+          </form>
+
+          <p class="form-msg" id="msg-login" role="alert" hidden></p>
+
+          <p class="link-line">아직 계정이 없으신가요? <a id="go-signup" role="button" tabindex="0">회원가입</a></p>
+        </div>
+
+        <!-- 회원가입 폼 -->
+        <div id="pane-signup" hidden>
+          <span class="tag">STEP · 회원가입</span>
+          <h1>회원가입</h1>
+          <p class="subline">이메일과 비밀번호만으로 바로 시작해요</p>
+
+          <form id="form-signup" novalidate>
+            <div class="field">
+              <label for="signup-email">이메일</label>
+              <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label for="signup-pw">비밀번호</label>
+              <input id="signup-pw" name="password" type="password" autocomplete="new-password" placeholder="8자 이상 입력해주세요" required minlength="8">
+            </div>
+            <button class="cta ochre" type="submit" id="btn-signup">가입하기</button>
+          </form>
+
+          <p class="form-msg" id="msg-signup" role="alert" hidden></p>
+
+          <p class="link-line">이미 계정이 있으신가요? <a id="go-login" role="button" tabindex="0">로그인</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 로그인 후 신청 화면 -->
+  <section class="view" id="view-class" hidden>
+    <div class="card loggedin" id="class-card">
+      <div class="spine">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="content">
+        <div class="userbar">
+          <span class="who"><b id="user-name">회원</b>님으로 로그인됨</span>
+          <button class="logout" type="button" id="btn-logout">로그아웃</button>
+        </div>
+
+        <span class="tag" id="class-tag">STEP · 신청</span>
+        <h1 id="class-title">클래스</h1>
+        <p class="subline" id="class-subtitle"></p>
+
+        <ul class="meta">
+          <li><span class="k">일시</span><span class="v"><b id="class-when"></b></span></li>
+          <li><span class="k">장소</span><span class="v" id="class-place"></span></li>
+          <li><span class="k">강사</span><span class="v instructor" id="class-instructor"></span></li>
+        </ul>
+
+        <div class="seats">
+          <div class="seats-row">
+            <span class="seats-label">남은 자리</span>
+            <span class="seats-count"><span class="num" id="class-remaining">–</span> <span class="of" id="class-capacity">/ –</span></span>
+          </div>
+          <div class="dots" id="class-dots" aria-label="정원 대비 신청 현황"></div>
+        </div>
+
+        <button class="cta ochre" type="button" id="btn-apply">신청하기</button>
+
+        <p class="form-msg" id="msg-class" role="alert" hidden></p>
+
+        <p class="history" id="class-history" hidden>
+          <span class="dot"></span>내 신청 내역: <b id="history-status">신청 완료</b> <span id="history-date"></span>
+        </p>
+
+        <div class="stamp" id="class-stamp" hidden>마감<br>되었습니다</div>
+      </div>
+    </div>
+  </section>
+
+  <p class="footnote">Supabase · GitHub Pages 정적 호스팅</p>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
