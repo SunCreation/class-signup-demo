@@ -75,45 +75,93 @@
     </div>
   </section>
 
-  <!-- 로그인 후 신청 화면 -->
+  <!-- 로그인 후 -->
   <section class="view" id="view-class" hidden>
-    <div class="card loggedin" id="class-card">
-      <div class="spine">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      </div>
-      <div class="content">
-        <div class="userbar">
-          <span class="who"><b id="user-name">회원</b>님으로 로그인됨</span>
-          <button class="logout" type="button" id="btn-logout">로그아웃</button>
-        </div>
-
-        <span class="tag" id="class-tag">STEP · 신청</span>
-        <h1 id="class-title">클래스</h1>
-        <p class="subline" id="class-subtitle"></p>
-
-        <ul class="meta">
-          <li><span class="k">일시</span><span class="v"><b id="class-when"></b></span></li>
-          <li><span class="k">장소</span><span class="v" id="class-place"></span></li>
-          <li><span class="k">강사</span><span class="v instructor" id="class-instructor"></span></li>
-        </ul>
-
-        <div class="seats">
-          <div class="seats-row">
-            <span class="seats-label">남은 자리</span>
-            <span class="seats-count"><span class="num" id="class-remaining">–</span> <span class="of" id="class-capacity">/ –</span></span>
+    <div class="class-wrap">
+      <!-- 상단 바 -->
+      <div class="pagehead">
+        <span class="who"><b id="user-name">회원</b>님으로 로그인됨</span>
+        <div class="head-actions">
+          <div class="tabs" role="tablist">
+            <button class="tab-btn is-active" id="tab-classes" type="button" role="tab">클래스</button>
+            <button class="tab-btn" id="tab-admin" type="button" role="tab" hidden>관리자</button>
           </div>
-          <div class="dots" id="class-dots" aria-label="정원 대비 신청 현황"></div>
+          <button class="logout" id="btn-logout" type="button">로그아웃</button>
+        </div>
+      </div>
+
+      <!-- 내 신청 내역 요약 -->
+      <div class="summary" id="my-summary" hidden>
+        <span class="summary-label">내 신청 내역</span>
+        <div class="summary-chips" id="summary-chips"></div>
+      </div>
+
+      <!-- 클래스 목록 패널 -->
+      <div id="panel-classes">
+        <p class="section-label"><span>신청 가능한 클래스</span></p>
+        <p class="form-msg" id="msg-class" role="alert" hidden></p>
+        <div class="classes-grid" id="classes-grid"></div>
+        <p class="empty-note" id="classes-empty" hidden>아직 열린 클래스가 없어요.</p>
+      </div>
+
+      <!-- 관리자 패널 -->
+      <div id="panel-admin" hidden>
+        <p class="section-label"><span>관리자 · 클래스 관리</span></p>
+
+        <div class="card admin-card">
+          <div class="spine">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="content">
+            <span class="tag" id="admin-form-tag">새 클래스 추가</span>
+            <h1 id="admin-form-title">클래스 추가</h1>
+            <p class="subline">정원은 1명 이상으로 입력해 주세요</p>
+
+            <form id="form-admin-class" novalidate>
+              <input type="hidden" id="admin-id" value="">
+              <div class="field">
+                <label for="admin-title">제목</label>
+                <input id="admin-title" type="text" placeholder="예) 초보 손그림 원데이 클래스" required>
+              </div>
+              <div class="field">
+                <label for="admin-subtitle">부제</label>
+                <input id="admin-subtitle" type="text" placeholder="예) 연필 한 자루로 시작하는 관찰 드로잉">
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label for="admin-when">일시</label>
+                  <input id="admin-when" type="text" placeholder="예) 이번 주 토요일 오후 2시">
+                </div>
+                <div class="field">
+                  <label for="admin-place">장소</label>
+                  <input id="admin-place" type="text" placeholder="예) 을지로 3가 작업실">
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label for="admin-instructor">강사</label>
+                  <input id="admin-instructor" type="text" placeholder="예) 최다인 강사">
+                </div>
+                <div class="field">
+                  <label for="admin-capacity">정원</label>
+                  <input id="admin-capacity" type="number" min="1" step="1" value="10" placeholder="10" required>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <button class="cta ochre" type="submit" id="btn-admin-submit">추가하기</button>
+                <button class="cta ghost" type="button" id="btn-admin-cancel" hidden>취소</button>
+              </div>
+            </form>
+
+            <p class="form-msg" id="msg-admin" role="alert" hidden></p>
+          </div>
         </div>
 
-        <button class="cta ochre" type="button" id="btn-apply">신청하기</button>
-
-        <p class="form-msg" id="msg-class" role="alert" hidden></p>
-
-        <p class="history" id="class-history" hidden>
-          <span class="dot"></span>내 신청 내역: <b id="history-status">신청 완료</b> <span id="history-date"></span>
-        </p>
-
-        <div class="stamp" id="class-stamp" hidden>마감<br>되었습니다</div>
+        <p class="section-label"><span>등록된 클래스</span></p>
+        <p class="form-msg" id="msg-admin-list" role="alert" hidden></p>
+        <div class="classes-grid" id="admin-grid"></div>
+        <p class="empty-note" id="admin-empty" hidden>등록된 클래스가 없어요.</p>
       </div>
     </div>
   </section>

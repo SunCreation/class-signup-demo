@@ -492,7 +492,279 @@ button.cta:disabled{
   text-align: center;
 }
 
+/* =========================================================================
+   로그인 후 레이아웃 (여러 클래스 + 관리자)
+   ========================================================================= */
+.class-wrap{
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* 상단 바 (종이 스트립) */
+.pagehead{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--pine);
+  border-radius: 4px 14px 14px 4px;
+  padding: 14px 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 10px 24px -18px rgba(42,38,32,0.4);
+}
+.pagehead .who{
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.pagehead .who b{
+  color: var(--pine);
+  font-family: 'Nanum Myeongjo', 'AppleMyungjo', 'Batang', serif;
+  font-size: 16px;
+}
+.head-actions{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pagehead .logout{
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  text-decoration: underline;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+}
+.pagehead .logout:hover{ color: var(--ink-soft); }
+
+/* 탭 */
+.tabs{
+  display: inline-flex;
+  gap: 4px;
+  background: var(--card-bg-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px;
+}
+.tab-btn{
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 16px;
+  cursor: pointer;
+}
+.tab-btn.is-active{
+  background: var(--pine);
+  color: #F5EFDD;
+  box-shadow: 0 4px 10px -6px rgba(47,76,59,0.6);
+}
+
+/* 섹션 라벨 */
+.section-label{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0 16px;
+  color: var(--ink-soft);
+}
+.section-label span{
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+.section-label::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--muted-dark), transparent);
+}
+
+/* 내 신청 내역 요약 */
+.summary{
+  background: var(--card-bg);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 8px;
+}
+.summary-label{
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.summary-chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip{
+  display: inline-flex;
+  align-items: center;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  background: var(--card-bg-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+.chip b{
+  color: var(--pine);
+  font-weight: 700;
+}
+
+/* 클래스 그리드 */
+.classes-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+/* 그리드 안의 카드는 폭 제한 해제 */
+.card.grid-card{
+  max-width: none;
+  width: 100%;
+}
+
+.empty-note{
+  color: var(--ink-faint);
+  font-size: 13.5px;
+  text-align: center;
+  padding: 30px 0;
+}
+.empty-note[hidden]{ display: none; }
+
+/* =========================================================================
+   관리자 폼 / 카드
+   ========================================================================= */
+.admin-card{
+  max-width: none;
+  width: 100%;
+}
+.grid-2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.btn-row{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.btn-row .cta{ margin-top: 4px; }
+button.cta.ghost{
+  flex: 0 0 auto;
+  width: auto;
+  padding: 14px 20px;
+  color: var(--ink-soft);
+  background: var(--card-bg-2);
+  border: 1.5px solid var(--line);
+  box-shadow: none;
+}
+button.cta.ghost:hover{ color: var(--ink); }
+
+/* 관리 액션 버튼들 */
+.admin-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+}
+.chip-btn{
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--pine);
+  background: var(--card-bg-2);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.chip-btn:hover{ border-color: var(--pine); }
+.chip-btn.danger{ color: var(--berry); }
+.chip-btn.danger:hover{ border-color: var(--berry); }
+.chip-btn:disabled{
+  color: var(--ink-faint);
+  cursor: not-allowed;
+  border-color: var(--line);
+}
+
+/* 신청자 명단 */
+.signups{
+  margin-top: 14px;
+  padding: 14px;
+  background: var(--card-bg-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.signups[hidden]{ display: none; }
+.signups-note{
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+}
+.signups-note.error-text{ color: var(--berry); }
+.signups-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.signups-list li{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted var(--line);
+}
+.signups-list li:last-child{ border-bottom: none; padding-bottom: 0; }
+.sg-email{ color: var(--ink); word-break: break-all; }
+.sg-when{
+  color: var(--ink-faint);
+  font-size: 12px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* 관리자 카드 톤 (오커 스파인 대신 파인 유지, 마감이면 muted) */
+.card.grid-card.admin .tag{
+  background: var(--pine);
+  color: #F5EFDD;
+}
+.card.grid-card.admin .tag::before{ background: var(--ochre-soft); }
+.card.grid-card.admin.closed .tag{
+  background: var(--muted-dark);
+  color: #3a3427;
+}
+
 /* ------- 반응형 ------- */
+@media (max-width: 720px){
+  .classes-grid{ grid-template-columns: 1fr; }
+}
 @media (max-width: 520px){
   body{ padding: 24px 14px 40px; }
   .content{ padding: 24px 20px 22px; }
@@ -500,4 +772,7 @@ button.cta:disabled{
   .spine{ width: 24px; flex: 0 0 24px; }
   .stamp{ top: 96px; right: 14px; font-size: 15px; }
   .dots i{ width: 18px; height: 18px; }
+  .grid-2{ grid-template-columns: 1fr; }
+  .pagehead{ flex-direction: column; align-items: flex-start; gap: 12px; }
+  .head-actions{ width: 100%; justify-content: space-between; }
 }
